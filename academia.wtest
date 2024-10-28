@@ -7,14 +7,14 @@ describe "Academia de Magia" {
 	 * Si el diseño de la solución utiliza objetos bien conocidos en algunos casos entonces 
 	 * se debe remover la declaración de la constante y el comentario que se sugiere la instanciación.
 	 */
-	const pelota = null // TODO: construir/obtener una cosa con volumen = 3, marca = cuchuflito, no es mágica ni una reliquia
-	const escoba = null // TODO: construir/obtener una cosa con volumen = 4, marca = acme, es mágica y una reliquia
-	const varita = null // TODO: construir/obtener una cosa con volumen = 1, marca = fenix, es mágica pero no es una reliquia
-	const pava = null // TODO: construir/obtener una cosa con volumen = 2, marca = acme, no es magica pero sí una reliquia
-	const lamparaAladino = null // TODO: construir/obtener una cosa con volumen = 3, marca = fenix, es mágica y una reliquia
-	const baul = null // TODO: construir/obtener un baúl con volumen máximo = 5 y la escoba dentro
-	const gabineteMagico = null // TODO: construir/obtener un gabinete mágico con la varita dentro. El precio = 6 (segunda parte)
-	const armario = null // TODO: construir/obtener un armario con cantidad máxima = 2 y la pelota dentro
+	const pelota = new Cosa(marca = Cuchuflito, volumen = 3, esMagico = false, reliquia = false)// TODO: construir/obtener una cosa con volumen = 3, marca = cuchuflito, no es mágica ni una reliquia
+	const escoba = new Cosa(marca = Acme, volumen = 4, esMagico = true, reliquia = true) // TODO: construir/obtener una cosa con volumen = 4, marca = acme, es mágica y una reliquia
+	const varita = new Cosa(marca = Fenix, volumen = 1, esMagico = true, reliquia = false) // TODO: construir/obtener una cosa con volumen = 1, marca = fenix, es mágica pero no es una reliquia
+	const pava = new Cosa(marca = Acme, volumen = 2, esMagico = false, reliquia = true) // TODO: construir/obtener una cosa con volumen = 2, marca = acme, no es magica pero sí una reliquia
+	const lamparaAladino = new Cosa(marca = Fenix, volumen = 3, esMagico = true, reliquia = true) // TODO: construir/obtener una cosa con volumen = 3, marca = fenix, es mágica y una reliquia
+	const baul = new Baul(volumenMaximo = 5, cosas = [escoba])// TODO: construir/obtener un baúl con volumen máximo = 5 y la escoba dentro
+	const gabineteMagico = new GabineteMagico(cosas=[varita]) // TODO: construir/obtener un gabinete mágico con la varita dentro. El precio = 6 (segunda parte)
+	const armario = new ArmarioConvencional(cantidadMaxima=2, cosas = [pelota]) // TODO: construir/obtener un armario con cantidad máxima = 2 y la pelota dentro
 	const academia = null // TODO: construir/obtener una academia que tiene el baúl, el gabinete mágico y el armario
 
 /* ACLARACIÓN
