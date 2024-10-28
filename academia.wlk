@@ -56,7 +56,7 @@ class Baul inherits Mueble{
 	 }
 
 	 override validarEspecifico(cosa){
-		if(self.volumenMaximo() - volumenUsado() > cosa.volumen())
+		if(not self.volumenMaximo() - volumenUsado() > cosa.volumen())
 		throw exception
 	 }
 }
