@@ -52,7 +52,7 @@ class Baul inherits Mueble{
 	var property volumenMaximo
 	 
 	 method volumenUsado(){
-		return cosas.sum()
+		return cosas.sum({cosa => cosa.volumen()})
 	 }
 
 	 override validarEspecifico(cosa){
