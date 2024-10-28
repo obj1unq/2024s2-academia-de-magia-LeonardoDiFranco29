@@ -13,7 +13,7 @@ class Mueble{
 
 	method validarGuardar(cosa) {
 		if (self.validarEspecifico(cosa) and not self.estaEnCosas(cosa))
-		throw Exception
+		throw Exception 
 	}
 
 	method validarEspecifico(cosa)
@@ -63,4 +63,8 @@ class Baul inherits Mueble{
 
 class Academia {
 	const muebles = []
+
+		method estaEnAcademia(cosa){
+			return muebles.any({mueble => mueble.estaEnCosas(cosa)})
+		}
 }
