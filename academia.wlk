@@ -9,11 +9,13 @@ class Cosa {
 }
 
 class Mueble{
-	const cosas = []
+	const cosas = #{}
 
 	method validarGuardar(cosa) {
-		if (self.validarEspecifico(cosa) and not self.estaEnCosas(cosa))
-		throw Exception 
+		if (self.validarEspecifico(cosa) and not self.estaEnCosas(cosa)){
+			self.error("no se puede guardar")
+		}
+		 
 	}
 
 	method validarEspecifico(cosa)
@@ -22,15 +24,19 @@ class Mueble{
 	  return cosas.any({cosa2 => cosa2 == cosa})
 	}
 
+	method tiene(cosa) = cosas.contains(cosa) 
+
 
 }
 
 class ArmarioConvencional inherits Mueble{
 	var property cantidadMaxima 
 
-	override validarEspecifico(cosa){
-		if (not self.hayEspacio())
-		throw Exception
+	override method validarEspecifico(cosa){
+		if (not self.hayEspacio()){
+			self.error("no hay espacio")
+		}
+		
 	}
 
 	method hayEspacio(){
@@ -41,9 +47,11 @@ class ArmarioConvencional inherits Mueble{
 
 class GabineteMagico inherits Mueble{
 	
-	override validarEspecifico(cosa){
-		if (not self.esMagico())
-		throw execption
+	override method validarEspecifico(cosa){
+		if (not self.esMagico()){
+			self.error("no es magico")
+		}
+		
 	}
 
 }	
@@ -55,16 +63,21 @@ class Baul inherits Mueble{
 		return cosas.sum({cosa => cosa.volumen()})
 	 }
 
-	 override validarEspecifico(cosa){
-		if(not self.volumenMaximo() - volumenUsado() > cosa.volumen())
-		throw exception
+	 override method validarEspecifico(cosa){
+		if(not self.volumenMaximo() - self.volumenUsado() > cosa.volumen()){
+			self.error("supero el volumen maximo disponible")
+		}
 	 }
 }
 
 class Academia {
-	const muebles = []
+	const muebles = #{}
 
 		method estaEnAcademia(cosa){
 			return muebles.any({mueble => mueble.estaEnCosas(cosa)})
+		}
+
+		method cosaEstaGuardadaEn(cosa) {
+		  return muebles.find({mueble => mueble.tiene(cosa)})
 		}
 }
