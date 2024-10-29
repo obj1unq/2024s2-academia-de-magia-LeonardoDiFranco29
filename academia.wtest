@@ -48,12 +48,12 @@ describe "Academia de Magia" {
   		assert.notThat(academia.puedeGuardarAcademia(pava))// TODO: Verificar que ahora la pava NO se puede guardar en la academia
   	}
  
-/*
- * 	test "punto 1.4 saber en que muebles se puede guardar algo" {
- * 		// TODO: Verificar que al preguntar en que muebles se puede guardar la pava se obtiene el armario
- * 		// TODO: Verificar al preguntar en que muebles se puede guardar la lámpara se obtienen el armario y el gabinete mágico
- * 	}
- */
+
+ 	test "punto 1.4 saber en que muebles se puede guardar algo" {
+	assert.equals(#{armario}, academia.enQueMuebleSePuedeGuardar(pava))// TODO: Verificar que al preguntar en que muebles se puede guardar la pava se obtiene el armario
+	assert.equals(#{armario, gabineteMagico}, academia.enQueMuebleSePuedeGuardar(lamparaAladino))// TODO: Verificar al preguntar en que muebles se puede guardar la lámpara se obtienen el armario y el gabinete mágico
+ 	}
+
 /*
  * 	test "punto 1.5. guardar una cosa" {
  * 		// TODO: Guardar la pava en la academia

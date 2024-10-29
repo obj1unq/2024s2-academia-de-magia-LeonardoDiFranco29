@@ -102,4 +102,7 @@ class Academia {
 		method hayAlgunMuebleQuePuedeGuardar(cosa) {
 		  return muebles.any({mueble => mueble.puedeGuardar(cosa)})
 		}
+		method enQueMuebleSePuedeGuardar(cosa) {
+		  return muebles.filter({mueble => mueble.puedeGuardar(cosa)})
+		}
 }
