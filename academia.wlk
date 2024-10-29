@@ -105,4 +105,14 @@ class Academia {
 		method enQueMuebleSePuedeGuardar(cosa) {
 		  return muebles.filter({mueble => mueble.puedeGuardar(cosa)})
 		}
+		method guardar(cosa) {
+		  self.validarGuardadoAcademia(cosa)
+		  
+
+		}
+		method validarGuardadoAcademia(cosa) {
+		  if(not self.puedeGuardarAcademia(cosa)){
+			self.error("no se puede guardar")
+		  }
+		}
 }
