@@ -37,17 +37,17 @@ describe "Academia de Magia" {
  	assert.equals(baul, academia.cosaEstaGuardadaEn(escoba))	// TODO: Verificar que el mueble donde se guarda la escoba está guardada es el baúl
   	}
  
-/*
- * 	test "punto 1.3, saber si se puede guardar algo" {
- * 		// TODO: Verificar que la varita NO se puede guardar en la academia
- * 		// TODO: Verificar que la pelota NO se puede guardar en la academia
- * 		// TODO: Verificar que la escoba NO se puede guardar en la academia
- * 		// TODO: Verificar que la pava se puede guardar en la academia
- * 		// TODO: Verificar que la lámpara se puede guardar en la academia
- * 		// TODO: Cambiar la capacidad del armario a 1
- * 		// TODO: Verificar que ahora la pava NO se puede guardar en la academia
- * 	}
- */
+
+  	test "punto 1.3, saber si se puede guardar algo" {
+  		assert.notThat(academia.puedeGuardarAcademia(varita))// TODO: Verificar que la varita NO se puede guardar en la academia
+  		assert.notThat(academia.puedeGuardarAcademia(pelota))// TODO: Verificar que la pelota NO se puede guardar en la academia
+  		assert.notThat(academia.puedeGuardarAcademia(escoba))// TODO: Verificar que la escoba NO se puede guardar en la academia
+		assert.that(academia.puedeGuardarAcademia(pava))// TODO: Verificar que la pava se puede guardar en la academia
+  		assert.that(academia.puedeGuardarAcademia(lamparaAladino))// TODO: Verificar que la lámpara se puede guardar en la academia
+  		armario.cantidadMaxima(1) // TODO: Cambiar la capacidad del armario a 1
+  		assert.notThat(academia.puedeGuardarAcademia(pava))// TODO: Verificar que ahora la pava NO se puede guardar en la academia
+  	}
+ 
 /*
  * 	test "punto 1.4 saber en que muebles se puede guardar algo" {
  * 		// TODO: Verificar que al preguntar en que muebles se puede guardar la pava se obtiene el armario

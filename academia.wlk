@@ -25,7 +25,7 @@ class Mueble{
 	}
 
 	method tiene(cosa) = cosas.contains(cosa) 
-
+	method puedeGuardar(cosa)
 
 }
 
@@ -43,6 +43,14 @@ class ArmarioConvencional inherits Mueble{
 		return cantidadMaxima - 1 == 0
 	}
 
+	method cantidadActual() {
+		return cosas.size()
+	}
+
+	override method puedeGuardar(cosa) {
+		return self.cantidadActual() + 1 <= cantidadMaxima
+	}
+
 }
 
 class GabineteMagico inherits Mueble{
@@ -52,6 +60,9 @@ class GabineteMagico inherits Mueble{
 			self.error("no es magico")
 		}
 		
+	}
+	override method puedeGuardar(cosa) {
+			return cosa.esMagico() 
 	}
 
 }	
@@ -68,6 +79,9 @@ class Baul inherits Mueble{
 			self.error("supero el volumen maximo disponible")
 		}
 	 }
+	 override method puedeGuardar(cosa){
+		return self.volumenUsado() + cosa.volumen() <= self.volumenMaximo()
+	 } 
 }
 
 class Academia {
@@ -79,5 +93,13 @@ class Academia {
 
 		method cosaEstaGuardadaEn(cosa) {
 		  return muebles.find({mueble => mueble.tiene(cosa)})
+		}
+
+		method puedeGuardarAcademia(cosa) {
+		  return self.hayAlgunMuebleQuePuedeGuardar(cosa) and not self.estaEnAcademia(cosa)
+		}
+
+		method hayAlgunMuebleQuePuedeGuardar(cosa) {
+		  return muebles.any({mueble => mueble.puedeGuardar(cosa)})
 		}
 }
