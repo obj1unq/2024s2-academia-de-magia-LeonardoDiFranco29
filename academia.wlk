@@ -115,4 +115,6 @@ class Academia {
 			self.error("no se puede guardar")
 		  }
 		}
+
+		/*for each en el ultimo y filter en el anteultimo hacer una map con un min*/
 }
