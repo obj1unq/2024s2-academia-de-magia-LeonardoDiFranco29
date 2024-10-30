@@ -47,6 +47,8 @@ class Mueble{
 	method tiene(cosa) = cosas.contains(cosa) 
 	method puedeGuardar(cosa)
 
+	method cosaMenosUtil() = cosas.min({ c => c.utilidad() })
+
 }
 
 class ArmarioConvencional inherits Mueble{
@@ -111,7 +113,23 @@ class Baul inherits Mueble{
 	 } 
 
 	 override method precio() = volumenMaximo + 2
+
+	 override method utilidad() = super() + self.extras()
+	
+	 method extras() = if (self.sonTodasReliquias()) 2 else 0
+	
+	 method sonTodasReliquias() = cosas.all({ c => c.esReliquia() })
 }
+
+class BaulMagico inherits Baul {
+	override method utilidad() = super() + self.cantidadDeCosasMagicas()
+	
+	method cantidadDeCosasMagicas() = cosas.count({ c => c.esMagico() })
+	
+	override method precio() = super() * 2
+}
+
+
 
 class Academia {
 	const muebles = #{}
@@ -148,6 +166,25 @@ class Academia {
 		method guardarEnMuebleDisponible(cosa) {
 			return self.enQueMuebleSePuedeGuardar(cosa).anyOne().agregar(cosa)
 		}
+
+		method menosUtiles() = muebles.map({ m => m.cosaMenosUtil() }).asSet()
+
+		method marcaMenosUtil() = self.menosUtiles().min({ c => c.utilidad() }).marca()
+
+		method removerMenosUtilesNoMagicas() {
+		self.lasCosasQueNoSonMagicasMenosUtiles().forEach(
+			{ c => self.remover(c) }
+		)
+	}
+
+
+	method lasCosasQueNoSonMagicasMenosUtiles() {
+	  return self.menosUtiles().filter({ c => not c.esMagica() })
+	}
+	
+	method remover(cosa) {
+		self.cosaEstaGuardadaEn(cosa).remover(cosa)
+	}
 
 		
 		/*for each en el ultimo y filter en el anteultimo hacer una map con un min*/
