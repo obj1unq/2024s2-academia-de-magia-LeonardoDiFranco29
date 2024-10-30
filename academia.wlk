@@ -1,10 +1,16 @@
 
 class Cosa {
 
-	var property marca
+	var marca
 	var property volumen 
 	var property esMagico
-	var property reliquia     
+	var property esReliquia     
+
+	method utilidad() = ((volumen + self.valorDeMagia()) + self.valorDeReliquia()) + marca.valor(self)
+	
+	method valorDeMagia() = if (esMagico) 3 else 0
+	
+	method valorDeReliquia() = if (esReliquia) 5 else 0
 
 }
 
@@ -16,6 +22,20 @@ class Mueble{
 			self.error("no se puede guardar")
 		}
 		 
+	}
+
+	method utilidad() {
+	  return self.utilidadDeLasCosas() / self.precio()
+	}
+
+	method utilidadDeLasCosas() {
+	  return cosas.sum({ c => c.utilidad() })
+	}
+
+	method precio()
+
+	method agregar(cosa) {
+	  cosas.add(cosa)
 	}
 
 	method validarEspecifico(cosa)
@@ -51,12 +71,16 @@ class ArmarioConvencional inherits Mueble{
 		return self.cantidadActual() + 1 <= cantidadMaxima
 	}
 
+	override method precio() = 5 * cantidadMaxima
+
 }
 
 class GabineteMagico inherits Mueble{
 	
+	const precio // porque se define para cada gabinete
+	
 	override method validarEspecifico(cosa){
-		if (not self.esMagico()){
+		if (not cosa.esMagico()){
 			self.error("no es magico")
 		}
 		
@@ -65,6 +89,9 @@ class GabineteMagico inherits Mueble{
 			return cosa.esMagico() 
 	}
 
+	override method precio() = precio
+
+	
 }	
 
 class Baul inherits Mueble{
@@ -82,6 +109,8 @@ class Baul inherits Mueble{
 	 override method puedeGuardar(cosa){
 		return self.volumenUsado() + cosa.volumen() <= self.volumenMaximo()
 	 } 
+
+	 override method precio() = volumenMaximo + 2
 }
 
 class Academia {
@@ -107,14 +136,31 @@ class Academia {
 		}
 		method guardar(cosa) {
 		  self.validarGuardadoAcademia(cosa)
-		  
+		  self.guardarEnMuebleDisponible(cosa)
 
 		}
 		method validarGuardadoAcademia(cosa) {
 		  if(not self.puedeGuardarAcademia(cosa)){
-			self.error("no se puede guardar")
+			self.error("no se puede guardar" + cosa)
 		  }
 		}
 
+		method guardarEnMuebleDisponible(cosa) {
+			return self.enQueMuebleSePuedeGuardar(cosa).anyOne().agregar(cosa)
+		}
+
+		
 		/*for each en el ultimo y filter en el anteultimo hacer una map con un min*/
+}
+
+object cuchuflito {
+	method valor(cosa) = 0
+}
+
+object acme {
+	method valor(cosa) = cosa.volumen() / 2
+}
+
+object fenix {
+	method valor(cosa) = if (cosa.esReliquia()) 3 else 0
 }
