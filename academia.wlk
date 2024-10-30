@@ -1,10 +1,10 @@
 
 class Cosa {
 
-	var marca
-	var property volumen 
-	var property esMagico
-	var property esReliquia     
+	const property marca
+	const property volumen
+	const property esMagico
+	const property esReliquia    
 
 	method utilidad() = ((volumen + self.valorDeMagia()) + self.valorDeReliquia()) + marca.valor(self)
 	
@@ -36,6 +36,10 @@ class Mueble{
 
 	method agregar(cosa) {
 	  cosas.add(cosa)
+	}
+
+	method remover(cosa) {
+		cosas.remove(cosa)
 	}
 
 	method validarEspecifico(cosa)
@@ -172,14 +176,21 @@ class Academia {
 		method marcaMenosUtil() = self.menosUtiles().min({ c => c.utilidad() }).marca()
 
 		method removerMenosUtilesNoMagicas() {
+		self.validarRemover()
 		self.lasCosasQueNoSonMagicasMenosUtiles().forEach(
 			{ c => self.remover(c) }
 		)
 	}
 
+	method validarRemover() {
+	  if(muebles.size() < 3){
+			self.error("No se puede tirar, no hay al menos 3 muebles")
+	}
+	}
+
 
 	method lasCosasQueNoSonMagicasMenosUtiles() {
-	  return self.menosUtiles().filter({ c => not c.esMagica() })
+	  return self.menosUtiles().filter({ c => not c.esMagico() })
 	}
 	
 	method remover(cosa) {
@@ -187,6 +198,9 @@ class Academia {
 	}
 
 		
+	method sacarMueble(mueble) {
+	  muebles.remove(mueble)
+	}
 		/*for each en el ultimo y filter en el anteultimo hacer una map con un min*/
 }
 
